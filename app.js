@@ -4,6 +4,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 var NaMe= "";
+var mess ="";
+var dbUsers =[];
 
 const app = express();
 
@@ -23,18 +25,26 @@ const userSchema = {
 
 const user = mongoose.model("user", userSchema );
 
-
-
-
-
-
 app.get("/", function(req,res){
 
-    res.sendFile(__dirname + "index.html");
-    res.render("crud");
+    res.render("home");
+
+    
 });
 
 app.post("/", function(req,res){
+       res.render("crud"); 
+
+});
+
+
+app.get("/crud",function(req,res){
+
+    res.render("crud");
+    
+})
+app.post("/crud",function(req,res){
+
     NaMe=req.body.uname;
     console.log(NaMe);
     const cu = new user({
@@ -42,7 +52,25 @@ app.post("/", function(req,res){
     });
 
     cu.save();
+
+    mess = "Entered successfully";
+    res.render("login");
+    
 })
+
+app.get("/login",function(req,res){
+
+    res.render("login");
+    
+})
+
+app.post("/login",function(req,res){
+
+    res.render("login");
+    
+})
+
+
 
 app.listen(3000, function(){
 
