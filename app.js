@@ -25,6 +25,7 @@ const userSchema = {
 
 const user = mongoose.model("user", userSchema );
 
+
 app.get("/", function(req,res){
 
     res.render("home");
@@ -65,6 +66,14 @@ app.get("/login",function(req,res){
 })
 
 app.post("/login",function(req,res){
+
+    NaMe=req.body.lname;
+    user.forEach(function(user){
+
+        if(user.name==lname){
+            res.render("dash");
+        }
+    })
 
     res.render("login");
     
